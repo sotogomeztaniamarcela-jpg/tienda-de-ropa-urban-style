@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UrbanStyle | Moda Urbana</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header>
+        <nav class="navbar">
+
+            <a href="#inicio" class="logo">
+                URBAN<span>STYLE</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#colecciones">Colecciones</a>
+                <a href="#catalogo">Catálogo</a>
+            </div>
+
+            <button class="cart-button" onclick="abrirCarrito()">
+                🛒 Carrito
+                <span id="contadorCarrito">0</span>
+            </button>
+
+        </nav>
+    </header>
+
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">NUEVA COLECCIÓN 2026</span>
+
+            <h1>
+                TU ESTILO.<br>
+                <span>TUS REGLAS.</span>
+            </h1>
+
+            <p>
+                Descubre la moda urbana que representa tu personalidad.
+                Diseños exclusivos para destacar todos los días.
+            </p>
+
+            <a href="#catalogo" class="btn-primary">
+                EXPLORAR COLECCIÓN →
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80"
+                 alt="Moda urbana">
+        </div>
+
+    </section>
+
+    <!-- PROMOCIÓN -->
+    <section class="promo">
+
+        <h2>🔥 URBAN DAYS</h2>
+
+        <p>
+            Aprovecha un <strong>10% de descuento</strong>
+            utilizando el cupón:
+        </p>
+
+        <span class="coupon">URBAN10</span>
+
+    </section>
+
+    <!-- COLECCIONES -->
+    <section class="collections" id="colecciones">
+
+        <div class="section-title">
+            <span>DESCUBRE TU ESTILO</span>
+            <h2>Colecciones destacadas</h2>
+        </div>
+
+        <div class="collection-grid">
+
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
+                     alt="Colección camisetas">
+
+                <div class="collection-info">
+                    <h3>Streetwear</h3>
+                    <button onclick="filtrarColeccion('Camisetas')">
+                        Ver colección →
+                    </button>
+                </div>
+            </div>
+
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80"
+                     alt="Colección jeans">
+
+                <div class="collection-info">
+                    <h3>Denim</h3>
+                    <button onclick="filtrarColeccion('Pantalones')">
+                        Ver colección →
+                    </button>
+                </div>
+            </div>
+
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=80"
+                     alt="Colección sudaderas">
+
+                <div class="collection-info">
+                    <h3>Urban Essentials</h3>
+                    <button onclick="filtrarColeccion('Sudaderas')">
+                        Ver colección →
+                    </button>
+            </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="catalog" id="catalogo">
+
+        <div class="section-title">
+            <span>URBAN STYLE SHOP</span>
+            <h2>Nuestra colección</h2>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filters">
+
+            <select id="filtroCategoria">
+                <option value="Todos">Todas las categorías</option>
+                <option value="Camisetas">Camisetas</option>
+                <option value="Pantalones">Pantalones</option>
+                <option value="Sudaderas">Sudaderas</option>
+                <option value="Chaquetas">Chaquetas</option>
+                <option value="Accesorios">Accesorios</option>
+            </select>
+
+            <select id="filtroTalla">
+                <option value="Todas">Todas las tallas</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="Única">Única</option>
+            </select>
+
+            <select id="ordenPrecio">
+                <option value="default">Ordenar por precio</option>
+                <option value="menor">Precio: menor a mayor</option>
+                <option value="mayor">Precio: mayor a menor</option>
+            </select>
+
+        </div>
+
+        <!-- PRODUCTOS DINÁMICOS -->
+        <div class="products-grid" id="productos"></div>
+
+    </section>
+
+    <!-- CARRITO -->
+    <div class="overlay" id="overlay" onclick="cerrarCarrito()"></div>
+
+    <aside class="cart-panel" id="carritoPanel">
+
+        <div class="cart-header">
+            <h2>Tu carrito 🛒</h2>
+            <button onclick="cerrarCarrito()" class="close-cart">✕</button>
+        </div>
+
+        <div id="listaCarrito"></div>
+
+        <div class="cart-summary">
+
+            <p>Subtotal:
+                <span id="subtotal">$0</span>
+            </p>
+
+            <div class="coupon-box">
+                <input type="text" id="codigoCupon" placeholder="Código de descuento">
+                <button onclick="aplicarCupon()">Aplicar</button>
+            </div>
+
+            <p id="mensajeCupon"></p>
+
+            <p>Descuento:
+                <span id="descuento">$0</span>
+            </p>
+
+            <h3>Total:
+                <span id="total">$0</span>
+            </h3>
+
+            <button class="btn-primary checkout-btn" onclick="irCheckout()">
+                FINALIZAR COMPRA →
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- FINALIZAR COMPRA -->
+    <section class="checkout" id="checkout">
+
+        <div class="section-title">
+            <span>ÚLTIMO PASO</span>
+            <h2>Finalizar compra</h2>
+        </div>
+
+        <div class="checkout-container">
+
+            <form id="formularioCompra">
+
+                <h3>Datos de envío</h3>
+
+                <label>Nombre completo</label>
+                <input type="text" id="nombre" required minlength="3">
+
+                <label>Correo electrónico</label>
+                <input type="email" id="correo" required>
+
+                <label>Teléfono</label>
+                <input type="tel" id="telefono" required pattern="[0-9]{10}">
+
+                <label>Dirección de envío</label>
+                <input type="text" id="direccion" required minlength="5">
+
+                <label>Ciudad</label>
+                <input type="text" id="ciudad" required>
+
+                <label>Notas del pedido</label>
+                <textarea id="notas" rows="3"></textarea>
+
+                <button type="submit" class="btn-primary">
+                    CONFIRMAR PEDIDO
+                </button>
+
+            </form>
+
+            <div class="checkout-summary">
+
+                <h3>Resumen del pedido</h3>
+
+                <div id="resumenPedido"></div>
+
+                <hr>
+
+                <p>Subtotal: <span id="checkoutSubtotal">$0</span></p>
+
+                <p>Descuento: <span id="checkoutDescuento">$0</span></p>
+
+                <h3>Total: <span id="checkoutTotal">$0</span></h3>
+
+            </div>
+
+        </div>
+
+        <div id="confirmacion"></div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>URBAN<span>STYLE</span></h2>
+
+        <p>Tu estilo, tus reglas.</p>
+
+        <p>© 2026 UrbanStyle. Todos los derechos reservados.</p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
